@@ -53,7 +53,8 @@ ynh_script_progression "Adding a configuration file..."
 for domain in ${domains} ; do
 	# Add domain configuration
 	ynh_config_add --template="domain.tpl.cfg.lua" --destination="/etc/prosody/conf.avail/${domain}.cfg.lua"
-	ln -sr /etc/prosody/conf.avail/${domain}.cfg.lua /etc/prosody/conf.d/
+	rm /etc/prosody/conf.d/${domain}.cfg.lua
+        ln -sr /etc/prosody/conf.avail/${domain}.cfg.lua /etc/prosody/conf.d/
 
 	# Add nginx config for xmpp subdomains
 	ynh_config_add --template="../conf/nginx-extra-xmpp.conf" --destination="/etc/nginx/conf.d/${domain}-extra-xmpp.conf"
